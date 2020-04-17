@@ -1,5 +1,6 @@
+OBJDIR=./obj
 all: run_sample
 
 run_sample:
-	verilator -Wall --cc our.v --exe sim_main.cpp
-	make -j -C obj_dir -f Vour.mk Vour
+	verilator -Wall --cc hello_world.v --exe hello_world.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vhello_world.mk Vhello_world
