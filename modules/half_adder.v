@@ -1,17 +1,17 @@
 module half_adder
   ( 
-    input_a,
-    input_b,
-    output_h,
-    output_l
+    i_a,
+    i_b,
+    o_h,
+    o_l
     );
    
-  input  input_a;
-  input  input_b;
-  output output_h;
-  output output_l;
+  input  i_a;
+  input  i_b;
+  output o_h;
+  output o_l;
   
-  assign output_h = input_a & input_b;
-  assign output_l = input_a ^ input_b;
+  assign o_h = i_a & i_b;
+  assign o_l = i_a ^ i_b;
  
 endmodule

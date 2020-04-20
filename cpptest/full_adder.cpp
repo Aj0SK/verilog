@@ -7,16 +7,16 @@ int main(int argc, char** argv, char** env)
 	Verilated::commandArgs(argc, argv);
 	Vfull_adder* top = new Vfull_adder;
 	while (!Verilated::gotFinish()) {
-        top->input_a = 1;
-        top->input_b = 1;
-        top->input_c = 1;
+        top->i_a = 1;
+        top->i_b = 1;
+        top->i_c = 1;
         top->eval();
-        printf("a:%d b:%d c:%d h:%d l:%d\n", top->input_a, top->input_b, top->input_c, top->output_h, top->output_l);
-        top->input_a = 1;
-        top->input_b = 0;
-        top->input_c = 1;
+        printf("a:%d b:%d c:%d h:%d l:%d\n", top->i_a, top->i_b, top->i_c, top->o_h, top->o_l);
+        top->i_a = 1;
+        top->i_b = 0;
+        top->i_c = 1;
         top->eval();
-        printf("a:%d b:%d c:%d h:%d l:%d\n", top->input_a, top->input_b, top->input_c, top->output_h, top->output_l);
+        printf("a:%d b:%d c:%d h:%d l:%d\n", top->i_a, top->i_b, top->i_c, top->o_h, top->o_l);
         break;
     }
 	delete top;
