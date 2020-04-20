@@ -4,7 +4,15 @@ CPPTESTS = ./cpptest
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: hello_world sample_and sample_nand
+all: hello_world sample_and sample_nand half_adder full_adder
+
+full_adder:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/full_adder.v --exe $(CPPTESTS)/full_adder.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vfull_adder.mk Vfull_adder
+
+half_adder:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/half_adder.v --exe $(CPPTESTS)/half_adder.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vhalf_adder.mk Vhalf_adder
 
 hello_world:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/hello_world.v --exe $(CPPTESTS)/hello_world.cpp -Mdir $(OBJDIR)
