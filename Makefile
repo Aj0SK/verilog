@@ -4,15 +4,19 @@ CPPTESTS = cpptest
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract
+all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero
 
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
+equal_zero:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/equal_zero.v --top-module equal_zero --exe $(CPPTESTS)/equal_zero.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vequal_zero.mk Vequal_zero
+
 subtract:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/subtract.v --top-module subtract --exe $(CPPTESTS)/subtract.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vsubtract.mk Vsubtract
-	
+
 increment:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/increment.v --top-module increment --exe $(CPPTESTS)/increment.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vincrement.mk Vincrement
