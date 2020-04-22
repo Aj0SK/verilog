@@ -1,19 +1,17 @@
-#include "Vincrement.h"
+#include "Vsubtract.h"
 #include <cstdio>
 #include <memory>
 #include <verilated.h>
 
 int main(int argc, char **argv, char **env) {
   Verilated::commandArgs(argc, argv);
-  std::unique_ptr<Vincrement> top(new Vincrement);
+  std::unique_ptr<Vsubtract> top(new Vsubtract);
   while (!Verilated::gotFinish()) {
-    top->i_a = 12;
+    top->i_a = 1 << 4;
+    top->i_b = 1 << 3;
     top->eval();
 
-    printf("a:%d increment: %d\n", top->i_a, top->o_c);
-    top->i_a = 15;
-    top->eval();
-    printf("a:%d increment: %d\n", top->i_a, top->o_c);
+    printf("a:%d b:%d subtract: %d\n", top->i_a, top->i_b, top->o_c);
     break;
   }
   top->final();
