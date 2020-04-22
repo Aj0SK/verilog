@@ -1,10 +1,17 @@
-OBJDIR = ./obj
-VERILOGMODULES = ./modules
-CPPTESTS = ./cpptest
+OBJDIR = obj
+VERILOGMODULES = modules
+CPPTESTS = cpptest
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: hello_world sample_and sample_nand half_adder full_adder adder
+all: hello_world sample_and sample_nand half_adder full_adder adder increment
+
+reformat:
+	clang-format -i -style=LLVM cpptest/*.cpp
+
+increment:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/increment.v --top-module increment --exe $(CPPTESTS)/increment.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vincrement.mk Vincrement
 
 adder:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/adder.v --top-module adder --exe $(CPPTESTS)/adder.cpp -Mdir $(OBJDIR)
