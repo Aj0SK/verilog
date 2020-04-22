@@ -4,10 +4,14 @@ CPPTESTS = cpptest
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector
+all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch
 
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
+
+switch:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/switch.v --top-module switch --exe $(CPPTESTS)/switch.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vswitch.mk Vswitch
 
 selector:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/selector.v --top-module selector --exe $(CPPTESTS)/selector.cpp -Mdir $(OBJDIR)
