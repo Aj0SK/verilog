@@ -1,27 +1,24 @@
-/* verilator lint_off UNUSED */
+`include "modules/latch.v"
 module d_flip_flop
   ( 
+    st,
     d,
-    reset,
-    load,
     clk,
-    q
+    o
     );
    
+  input st;
   input d;
-  input reset;
-  input load;
   input clk;
-  output reg q;
+  output reg o;
+  reg store;
   
   always @(posedge clk)
   begin
-    if (load)
-    begin
-        q <= d;
-    end else if (reset)
-    begin
-        q <= 0;
-    end
+    if(st) store <= d;
+    if(clk) o <= store;
   end
+  
+  //latch l1(st & (~cl), d, x);
+  //latch l2(clk, x, o);
 endmodule

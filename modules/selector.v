@@ -12,12 +12,5 @@ module selector
   input i_s;
   output o_c;
   
-  wire x;
-  wire y;
-  
-  and h1(x, i_b, i_s);
-  and h2(y, i_a, ~i_s);
-  
-  or(o_c, x, y);
-  
+  or(o_c, i_b & i_s, i_a & (~i_s));
 endmodule

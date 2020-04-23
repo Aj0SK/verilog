@@ -23,8 +23,7 @@ latch:
 	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v modules/latch.v
 
 d_flip_flop:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/d_flip_flop.v --top-module d_flip_flop --exe $(CPPTESTS)/memory/d_flip_flop.cpp -Mdir $(OBJDIR)
-	make -j -C $(OBJDIR) -f Vd_flip_flop.mk Vd_flip_flop
+	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v modules/memory/d_flip_flop.v
 
 switch:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/switch.v --top-module switch --exe $(CPPTESTS)/switch.cpp -Mdir $(OBJDIR)

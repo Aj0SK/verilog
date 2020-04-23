@@ -8,13 +8,7 @@ module latch
    
   input st;
   input d;
-  output reg o;
+  output o;
   
-  always @(st or d)
-  begin
-    if (st) begin
-    o <= d;
-    end
-  end
-  
+  selector s1(o, d, st, o);
 endmodule
