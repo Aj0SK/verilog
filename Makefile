@@ -1,13 +1,26 @@
 OBJDIR = obj
+BUILD = build
 VERILOGMODULES = modules
 CPPTESTS = cpptest
+TESTBENCHES = testbench
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch d_flip_flop
+all: prepare hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch d_flip_flop latch
+
+.PHONY: prepare clean reformat
+
+prepare: clean reformat
+	mkdir -p $(BUILD)
+
+clean:
+	rm -r -f obj build
 
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
+
+latch:
+	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v modules/latch.v
 
 d_flip_flop:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/d_flip_flop.v --top-module d_flip_flop --exe $(CPPTESTS)/d_flip_flop.cpp -Mdir $(OBJDIR)
