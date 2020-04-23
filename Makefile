@@ -23,7 +23,7 @@ latch:
 	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v modules/latch.v
 
 d_flip_flop:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/d_flip_flop.v --top-module d_flip_flop --exe $(CPPTESTS)/d_flip_flop.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/d_flip_flop.v --top-module d_flip_flop --exe $(CPPTESTS)/memory/d_flip_flop.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vd_flip_flop.mk Vd_flip_flop
 
 switch:
@@ -43,33 +43,33 @@ equal_zero:
 	make -j -C $(OBJDIR) -f Vequal_zero.mk Vequal_zero
 
 subtract:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/subtract.v --top-module subtract --exe $(CPPTESTS)/subtract.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/subtract.v --top-module subtract --exe $(CPPTESTS)/arithmetics/subtract.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vsubtract.mk Vsubtract
 
 increment:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/increment.v --top-module increment --exe $(CPPTESTS)/increment.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/increment.v --top-module increment --exe $(CPPTESTS)/arithmetics/increment.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vincrement.mk Vincrement
 
 adder:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/adder.v --top-module adder --exe $(CPPTESTS)/adder.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/adder.v --top-module adder --exe $(CPPTESTS)/arithmetics/adder.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vadder.mk Vadder
 
 full_adder:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/full_adder.v -top-module full_adder --exe $(CPPTESTS)/full_adder.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/full_adder.v -top-module full_adder --exe $(CPPTESTS)/arithmetics/full_adder.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vfull_adder.mk Vfull_adder
 
 half_adder:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/half_adder.v --exe $(CPPTESTS)/half_adder.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/half_adder.v --exe $(CPPTESTS)/arithmetics/half_adder.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vhalf_adder.mk Vhalf_adder
 
 hello_world:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/sample/hello_world.v --exe $(CPPTESTS)/hello_world.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/sample/hello_world.v --exe $(CPPTESTS)/sample/hello_world.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vhello_world.mk Vhello_world
 
 sample_and:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/sample/sample_and.v --exe $(CPPTESTS)/sample_and.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/sample/sample_and.v --exe $(CPPTESTS)/sample/sample_and.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vsample_and.mk Vsample_and
 
 sample_nand:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/sample/sample_nand.v --exe $(CPPTESTS)/sample_nand.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/sample/sample_nand.v --exe $(CPPTESTS)/sample/sample_nand.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vsample_nand.mk Vsample_nand
