@@ -1,4 +1,4 @@
-`include "modules/full_adder.v"
+`include "modules/arithmetics/full_adder.v"
 /* verilator lint_off UNUSED */
 module adder
   ( 

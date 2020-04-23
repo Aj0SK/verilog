@@ -1,4 +1,4 @@
-`include "modules/adder.v"
+`include "modules/arithmetics/adder.v"
 /* verilator lint_off UNUSED */
 /* verilator lint_off DECLFILENAME */
 module inverter

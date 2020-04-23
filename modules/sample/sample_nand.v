@@ -1,4 +1,4 @@
-`include "modules/sample_and.v"
+`include "modules/sample/sample_and.v"
 module sample_nand
   ( 
     input_1,

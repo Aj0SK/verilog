@@ -1,4 +1,4 @@
-`include "modules/half_adder.v"
+`include "modules/arithmetics/half_adder.v"
 module full_adder
   ( 
     i_a,
