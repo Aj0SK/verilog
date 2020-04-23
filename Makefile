@@ -4,10 +4,14 @@ CPPTESTS = cpptest
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch
+all: hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch d_flip_flop
 
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
+
+d_flip_flop:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/d_flip_flop.v --top-module d_flip_flop --exe $(CPPTESTS)/d_flip_flop.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vd_flip_flop.mk Vd_flip_flop
 
 switch:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/switch.v --top-module switch --exe $(CPPTESTS)/switch.cpp -Mdir $(OBJDIR)
