@@ -6,11 +6,11 @@ TESTBENCHES = testbench
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: prepare hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch d_flip_flop latch
+all: prepare hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch not_ready
 
 .PHONY: prepare clean reformat
 
-prepare: clean reformat
+prepare: clean
 	mkdir -p $(BUILD)
 
 clean:
@@ -19,29 +19,34 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
+not_ready: latch d_flip_flop register
+	
 register:
-	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v modules/memory/register.v
-
+	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
+	
 latch:
-	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v modules/latch.v
+	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v $(VERILOGMODULES)/latch.v
 
 d_flip_flop:
-	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v modules/memory/d_flip_flop.v
+	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v $(VERILOGMODULES)/memory/d_flip_flop.v
+
+
+
 
 switch:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/switch.v --top-module switch --exe $(CPPTESTS)/switch.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/plumbing/switch.v --top-module switch --exe $(CPPTESTS)/plumbing/switch.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vswitch.mk Vswitch
 
 selector:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/selector.v --top-module selector --exe $(CPPTESTS)/selector.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/plumbing/selector.v --top-module selector --exe $(CPPTESTS)/plumbing/selector.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vselector.mk Vselector
 
 less_than_zero:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/less_than_zero.v --top-module less_than_zero --exe $(CPPTESTS)/less_than_zero.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/less_than_zero.v --top-module less_than_zero --exe $(CPPTESTS)/arithmetics/less_than_zero.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vless_than_zero.mk Vless_than_zero
 
 equal_zero:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/equal_zero.v --top-module equal_zero --exe $(CPPTESTS)/equal_zero.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/equal_zero.v --top-module equal_zero --exe $(CPPTESTS)/arithmetics/equal_zero.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vequal_zero.mk Vequal_zero
 
 subtract:

@@ -2,11 +2,11 @@
 module equal_zero
   ( 
     i_a,
-    o
+    o_c
     );
    
   input wire[7:0] i_a;
-  output o;
+  output o_c;
   
   wire[7:0] invert_a;
   
@@ -26,5 +26,5 @@ module equal_zero
   
   and h7(helper3[0], helper2[0], helper2[1]);
   
-  assign o = helper3[0];
+  assign o_c = helper3[0];
 endmodule

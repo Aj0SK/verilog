@@ -1,4 +1,4 @@
-`include "modules/selector.v"
+`include "modules/plumbing/selector.v"
 module latch
   ( 
     st,

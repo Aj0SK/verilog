@@ -9,10 +9,10 @@ int main(int argc, char **argv, char **env) {
   while (!Verilated::gotFinish()) {
     top->i_a = 12;
     top->eval();
-    printf("a:%d equal_zero: %d\n", top->i_a, top->o);
+    printf("a:%d equal_zero: %d\n", top->i_a, top->o_c);
     top->i_a = 0;
     top->eval();
-    printf("a:%d equal_zero: %d\n", top->i_a, top->o);
+    printf("a:%d equal_zero: %d\n", top->i_a, top->o_c);
     break;
   }
   top->final();
