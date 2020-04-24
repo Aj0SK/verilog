@@ -1,7 +1,9 @@
-module d_flip_flop_tb();  
-  reg st, d, clk;
-  wire o;
-  d_flip_flop c1 (st, d, clk, o);
+module register_tb();  
+  reg st;
+  reg[7:0] d;
+  reg clk;
+  wire[7:0] o;
+  register c1 (st, d, clk, o);
 
   initial begin
   $display("st\td\tclk\to");
@@ -11,15 +13,15 @@ module d_flip_flop_tb();
   d = 1; st = 1; clk = 1; #1000;
   $display("%d\t%d\t%d\t%d", st, d, clk, o);
   #1000;
-  d = 0; st = 1; clk = 1; #1000;
+  d = 30; st = 1; clk = 1; #1000;
   $display("%d\t%d\t%d\t%d", st, d, clk, o);
   #1000;
-  d = 0; st = 1; clk = 0; #1000;
+  d = 31; st = 1; clk = 0; #1000;
   $display("%d\t%d\t%d\t%d", st, d, clk, o);
-  d = 0; st = 0; clk = 0; #1000;
+  d = 32; st = 0; clk = 0; #1000;
   $display("%d\t%d\t%d\t%d", st, d, clk, o);
   #1000;
-  d = 0; st = 1; clk = 1; #1000;
+  d = 33; st = 1; clk = 1; #1000;
   $display("%d\t%d\t%d\t%d", st, d, clk, o);
   #1000;
   end

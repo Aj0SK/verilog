@@ -19,6 +19,9 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
+register:
+	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v modules/memory/register.v
+
 latch:
 	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v modules/latch.v
 

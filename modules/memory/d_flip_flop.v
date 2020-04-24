@@ -11,14 +11,9 @@ module d_flip_flop
   input d;
   input clk;
   output reg o;
-  reg store;
   
   always @(posedge clk)
   begin
-    if(st) store <= d;
-    if(clk) o <= store;
+    if(st) o <= d;
   end
-  
-  //latch l1(st & (~cl), d, x);
-  //latch l2(clk, x, o);
 endmodule
