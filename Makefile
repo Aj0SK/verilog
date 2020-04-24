@@ -6,7 +6,7 @@ TESTBENCHES = testbench
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: prepare hello_world sample_and sample_nand half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch not_ready
+all: prepare sample comb seq
 
 .PHONY: prepare clean reformat
 
@@ -19,7 +19,11 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
-not_ready: latch d_flip_flop register
+seq: latch d_flip_flop register
+
+sample: hello_world sample_and sample_nand
+
+comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch
 	
 register:
 	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
