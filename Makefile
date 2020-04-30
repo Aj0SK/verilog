@@ -19,7 +19,7 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
-seq: latch d_flip_flop register
+seq: latch d_flip_flop register unary_alu
 
 sample: hello_world sample_and sample_nand
 
@@ -34,6 +34,8 @@ latch:
 d_flip_flop:
 	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v $(VERILOGMODULES)/memory/d_flip_flop.v
 
+unary_alu:
+	iverilog -o $(BUILD)/unary_alu $(TESTBENCHES)/unary_alu_tb.v $(VERILOGMODULES)/unary_alu.v
 
 
 
