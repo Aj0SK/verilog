@@ -27,7 +27,7 @@ module alu
   wire[7:0] RES1;
   wire[7:0] RES2;
   
-  assign RES1 = O1&O2;
+  assign RES1 = O1 & O2;
   adder a1(O1, O2, 1'b0, RES2);
   
   wire[7:0] RES;
