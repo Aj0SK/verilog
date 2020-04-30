@@ -35,7 +35,7 @@ d_flip_flop:
 	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v $(VERILOGMODULES)/memory/d_flip_flop.v
 
 unary_alu:
-	iverilog -o $(BUILD)/unary_alu $(TESTBENCHES)/unary_alu_tb.v $(VERILOGMODULES)/unary_alu.v
+	iverilog -o $(BUILD)/unary_alu $(TESTBENCHES)/alu/unary_alu_tb.v $(VERILOGMODULES)/alu/unary_alu.v
 
 
 
