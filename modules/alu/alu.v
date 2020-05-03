@@ -31,8 +31,8 @@ module alu
   adder a1(O1, O2, 1'b0, RES2);
   
   wire[7:0] RES;
-  selector8 s1(RES1, RES2, f, RES);
+  selector #(.BUS_WIDTH(8)) s1(RES1, RES2, f, RES);
   
-  selector8 s2(RES, ~RES, no, O);
+  selector #(.BUS_WIDTH(8)) s2(RES, ~RES, no, O);
   
 endmodule

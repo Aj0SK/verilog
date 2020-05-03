@@ -1,9 +1,9 @@
-module selectorN_tb();  
-  reg[5:0] i_a;
-  reg[5:0] i_b;
+module selector_tb();
+  reg[4:0] i_a;
+  reg[4:0] i_b;
   reg i_s;
-  wire[5:0] o_c;
-  selectorN #(.BUS_WIDTH(5)) sel(i_a, i_b, i_s, o_c);
+  wire[4:0] o_c;
+  selector #(.BUS_WIDTH(5)) sel(i_a, i_b, i_s, o_c);
 
   initial begin
   $display("i_a i_b i_s o_c");

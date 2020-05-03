@@ -14,6 +14,6 @@ module unary_alu
   
   input wire[7:0] helperWire1;
   
-  selector8 h1(X, 8'b0000, z, helperWire1);
-  selector8 h2(helperWire1, ~helperWire1, n, O);
+  selector #(.BUS_WIDTH(8)) h1(X, 8'b0000, z, helperWire1);
+  selector #(.BUS_WIDTH(8)) h2(helperWire1, ~helperWire1, n, O);
 endmodule

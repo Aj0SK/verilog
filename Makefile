@@ -6,7 +6,7 @@ TESTBENCHES = testbench
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: prepare sample comb seq nbit
+all: prepare sample comb seq
 
 .PHONY: prepare clean reformat
 
@@ -24,11 +24,6 @@ seq: latch d_flip_flop register unary_alu alu
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch
-
-nbit: selectorN
-
-selectorN:
-	iverilog -o $(BUILD)/selectorN $(TESTBENCHES)/plumbing/selectorN_tb.v $(VERILOGMODULES)/plumbing/selectorN.v
 
 register:
 	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
@@ -52,6 +47,7 @@ switch:
 selector:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/plumbing/selector.v --top-module selector --exe $(CPPTESTS)/plumbing/selector.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vselector.mk Vselector
+	iverilog -o $(BUILD)/selector $(TESTBENCHES)/plumbing/selector_tb.v $(VERILOGMODULES)/plumbing/selector.v
 
 less_than_zero:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/less_than_zero.v --top-module less_than_zero --exe $(CPPTESTS)/arithmetics/less_than_zero.cpp -Mdir $(OBJDIR)
