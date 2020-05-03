@@ -6,7 +6,7 @@ TESTBENCHES = testbench
 
 CPPFLAGS = -std=c++17 -O2 -Wall
 
-all: prepare sample comb seq
+all: prepare sample comb seq nbit
 
 .PHONY: prepare clean reformat
 
@@ -24,7 +24,12 @@ seq: latch d_flip_flop register unary_alu alu
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch
-	
+
+nbit: selectorN
+
+selectorN:
+	iverilog -o $(BUILD)/selectorN $(TESTBENCHES)/plumbing/selectorN_tb.v $(VERILOGMODULES)/plumbing/selectorN.v
+
 register:
 	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
 	
