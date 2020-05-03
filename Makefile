@@ -56,6 +56,7 @@ less_than_zero:
 equal_zero:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/equal_zero.v --top-module equal_zero --exe $(CPPTESTS)/arithmetics/equal_zero.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vequal_zero.mk Vequal_zero
+	iverilog -o $(BUILD)/equal_zero $(TESTBENCHES)/arithmetics/equal_zero_tb.v $(VERILOGMODULES)/arithmetics/equal_zero.v
 
 subtract:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/subtract.v --top-module subtract --exe $(CPPTESTS)/arithmetics/subtract.cpp -Mdir $(OBJDIR)

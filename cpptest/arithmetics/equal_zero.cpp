@@ -13,6 +13,12 @@ int main(int argc, char **argv, char **env) {
     top->i_a = 0;
     top->eval();
     printf("a:%d equal_zero: %d\n", top->i_a, top->o_c);
+    top->i_a = 122;
+    top->eval();
+    printf("a:%d equal_zero: %d\n", top->i_a, top->o_c);
+    top->i_a = 74;
+    top->eval();
+    printf("a:%d equal_zero: %d\n", top->i_a, top->o_c);
     break;
   }
   top->final();

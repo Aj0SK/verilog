@@ -1,12 +1,12 @@
-/* verilator lint_off UNUSED */
 module less_than_zero
   ( 
     i_a,
     o
     );
-   
-  input wire[7:0] i_a;
+  parameter BUS_WIDTH = 8;
+
+  input wire[BUS_WIDTH-1:0] i_a;
   output o;
   
-  assign o = i_a[7];
+  assign o = i_a[BUS_WIDTH-1];
 endmodule

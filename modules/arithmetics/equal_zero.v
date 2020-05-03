@@ -1,30 +1,29 @@
 /* verilator lint_off UNUSED */
+/* verilator lint_off UNOPTFLAT */
 module equal_zero
   ( 
     i_a,
     o_c
     );
-   
-  input wire[7:0] i_a;
+
+  parameter BUS_WIDTH = 8;
+
+  input wire[BUS_WIDTH-1:0] i_a;
   output o_c;
   
-  wire[7:0] invert_a;
-  
-  wire[4:0] helper1;
-  wire[2:0] helper2;
-  wire[1:0] helper3;
-  
+  wire[BUS_WIDTH-1:0] invert_a;
+
   assign invert_a = ~i_a;
+
+  wire[BUS_WIDTH-2:0] helper;
   
-  and h1(helper1[0], invert_a[0], invert_a[1]);
-  and h2(helper1[1], invert_a[2], invert_a[3]);
-  and h3(helper1[2], invert_a[4], invert_a[5]);
-  and h4(helper1[3], invert_a[6], invert_a[7]);
-  
-  and h5(helper2[0], helper1[0], helper1[1]);
-  and h6(helper2[1], helper1[2], helper1[3]);
-  
-  and h7(helper3[0], helper2[0], helper2[1]);
-  
-  assign o_c = helper3[0];
+  and (helper[0], invert_a[0], invert_a[1]);
+  generate
+  genvar i;
+  for (i = 1; i < BUS_WIDTH-1; i = i + 1)
+    begin
+      and(helper[i], helper[i-1], invert_a[i+1]);
+    end
+  endgenerate
+  assign o_c = helper[BUS_WIDTH-2];
 endmodule
