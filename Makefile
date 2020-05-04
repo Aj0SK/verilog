@@ -19,11 +19,14 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
-seq: latch d_flip_flop register unary_alu alu
+seq: latch d_flip_flop register unary_alu alu condition
 
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch
+
+condition:
+	iverilog -o $(BUILD)/condition_test $(TESTBENCHES)/alu/condition_tb.v $(VERILOGMODULES)/alu/condition.v
 
 register:
 	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
