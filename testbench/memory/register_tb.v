@@ -3,7 +3,7 @@ module register_tb();
   reg[7:0] d;
   reg clk;
   wire[7:0] o;
-  register c1 (st, d, clk, o);
+  register #(.BUS_WIDTH(8)) c1 (st, d, clk, o);
 
   initial begin
   $display("st\td\tclk\to");
