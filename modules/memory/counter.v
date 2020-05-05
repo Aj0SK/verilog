@@ -15,21 +15,26 @@ module counter
   input clk;
   output reg[BUS_WIDTH-1:0] o;
   
-  reg [BUS_WIDTH-1:0] helper1;
-  wire [BUS_WIDTH-1:0] helper2;
+  reg [BUS_WIDTH-1:0] curr;
+  wire [BUS_WIDTH-1:0] helper1;
 
-  increment inc1(helper1, helper2);
+  increment inc1(curr, helper1);
 
   always @(posedge clk)
   begin
-    o <= helper2;
+    o <= curr;
   end
 
-  always @(st)
+  always @(st, clk, X)
   begin
     if(st)
-      if(!clk)
-        helper1 <= X;
+    begin
+      if(!clk) curr <= X;
+    end
+    else
+    begin
+      if (!clk) curr <= helper1;
+    end
   end
   
 endmodule
