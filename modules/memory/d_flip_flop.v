@@ -12,8 +12,15 @@ module d_flip_flop
   input clk;
   output reg o;
   
+  reg stored;
+  
+  always @(st, d)
+  begin
+    if(st) stored <= d;
+  end
+  
   always @(posedge clk)
   begin
-    if(st) o <= d;
+    if(st) o <= stored;
   end
 endmodule
