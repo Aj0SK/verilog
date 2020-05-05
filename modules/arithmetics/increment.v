@@ -9,5 +9,5 @@ module increment
   input wire[7:0] i_a;
   output wire[7:0] o_c;
   
-  adder f1(i_a, 0, 1, o_c);
+  adder f1(i_a, 8'b00000000, 1'b1, o_c);
 endmodule

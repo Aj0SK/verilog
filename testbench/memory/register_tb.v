@@ -24,5 +24,8 @@ module register_tb();
   d = 33; st = 1; clk = 1; #1000;
   $display("%d\t%d\t%d\t%d", st, d, clk, o);
   #1000;
+  d = 15; st = 0; clk = 1; #1000;
+  $display("%d\t%d\t%d\t%d", st, d, clk, o);
+  #1000;
   end
 endmodule // test
