@@ -8,13 +8,15 @@ module subtract
     i_b,
     o_c
     );
-   
-  input wire[7:0] i_a;
-  input wire[7:0] i_b;
-  output wire[7:0] o_c;
   
-  wire[7:0] inv_i_b;
+  parameter BUS_WIDTH = 8;
+  
+  input wire[BUS_WIDTH-1:0] i_a;
+  input wire[BUS_WIDTH-1:0] i_b;
+  output wire[BUS_WIDTH-1:0] o_c;
+  
+  wire[BUS_WIDTH-1:0] inv_i_b;
   
   assign inv_i_b = ~i_b;
-  adder f1(i_a, inv_i_b, 1, o_c);
+  adder #(.BUS_WIDTH(BUS_WIDTH)) f1(i_a, inv_i_b, 1'b1, o_c);
 endmodule
