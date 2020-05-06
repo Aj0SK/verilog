@@ -19,11 +19,14 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/*.cpp
 
-seq: latch d_flip_flop register unary_alu alu condition counter
+seq: latch d_flip_flop register unary_alu alu condition counter ram
 
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch demultiplexor
+
+ram:
+	iverilog -o $(BUILD)/ram_test $(TESTBENCHES)/memory/ram_tb.v $(VERILOGMODULES)/memory/ram.v
 
 demultiplexor:
 	iverilog -o $(BUILD)/demultiplexor_test $(TESTBENCHES)/plumbing/demultiplexor_tb.v $(VERILOGMODULES)/plumbing/demultiplexor.v
