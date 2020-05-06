@@ -29,5 +29,33 @@ module ram_tb();
   ad=2; st=0; X = 15; clk = 1; #1000;
   $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
   #1000;
+  
+  ad=3; st=1; X = 1; clk = 0; #10000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #10000;
+  ad=3; st=1; X = 1; clk = 1; #10000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #10000;
+  ad=3; st=1; X = 40; clk = 1; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
+  ad=3; st=1; X = 41; clk = 0; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
+  ad=3; st=1; X = 42; clk = 1; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
+  ad=2; st=0; X = 20; clk = 0; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
+  ad=2; st=0; X = 21; clk = 1; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
+  ad=3; st=0; X = 21; clk = 0; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
+  ad=3; st=0; X = 21; clk = 1; #1000;
+  $display("%d\t%d\t%d\t%d\t%d", ad, st, X, clk, O);
+  #1000;
   end
 endmodule // test
