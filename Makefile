@@ -17,7 +17,7 @@ clean:
 	rm -r -f obj build
 
 reformat:
-	clang-format -i -style=LLVM cpptest/*.cpp
+	clang-format -i -style=LLVM cpptest/**/*.cpp
 
 seq: latch d_flip_flop register unary_alu alu condition counter ram
 

@@ -14,24 +14,20 @@ int main(int argc, char **argv, char **env) {
   srand(kSeed);
 
   while (!Verilated::gotFinish()) {
-    for (int i=0; i<kTestCases; ++i)
-    {
-        top->i_a = rand()%(1<<kBusWidth);
-        top->eval();
+    for (int i = 0; i < kTestCases; ++i) {
+      top->i_a = rand() % (1 << kBusWidth);
+      top->eval();
 
-        printf("a:%d increment: %d", top->i_a, top->o_c);
+      printf("a:%d increment: %d", top->i_a, top->o_c);
 
-        int expect = (top->i_a + 1)%(1<<kBusWidth);
+      int expect = (top->i_a + 1) % (1 << kBusWidth);
 
-        if (expect == top->o_c)
-        {
-            printf("\tSuccess\n");
-        }
-        else
-        {
-            printf("\tError\n");
-            break;
-        }
+      if (expect == top->o_c) {
+        printf("\tSuccess\n");
+      } else {
+        printf("\tError\n");
+        break;
+      }
     }
     break;
   }
