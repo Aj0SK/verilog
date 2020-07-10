@@ -13,3 +13,9 @@ All you need to have are two Verilog compilers: Verilator and Ikarus Verilog. Th
 ## Future work
 
 I want to transfer this design into the DE10-Nano FPGA. This is quite problematic as it requires deeper understanding of the underlying communication between the on-board ARM chip and FPGA.
+
+## Known issues
+
+In most of the advanced modules, I need to use /* verilator lint_off UNOPTFLAT */ so I am able to compile module using Verilator and run C++ tests.
+This is not because of some mistake in the implementation but rather on the Verilator missing ability to distinguish between individual wires of wire
+array.

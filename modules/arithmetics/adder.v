@@ -1,5 +1,6 @@
 `include "modules/arithmetics/full_adder.v"
 /* verilator lint_off UNUSED */
+/* verilator lint_off UNOPTFLAT */
 module adder
   ( 
     i_a,

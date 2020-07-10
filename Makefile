@@ -81,8 +81,8 @@ increment:
 	iverilog -o $(BUILD)/increment_test $(TESTBENCHES)/arithmetics/increment_tb.v $(VERILOGMODULES)/arithmetics/increment.v
 
 adder:
-	#verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/adder.v --top-module adder --exe $(CPPTESTS)/arithmetics/adder.cpp -Mdir $(OBJDIR)
-	#make -j -C $(OBJDIR) -f Vadder.mk Vadder
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/adder.v --top-module adder --exe $(CPPTESTS)/arithmetics/adder.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vadder.mk Vadder
 	iverilog -o $(BUILD)/adder_test $(TESTBENCHES)/arithmetics/adder_tb.v $(VERILOGMODULES)/arithmetics/adder.v
 
 full_adder:
