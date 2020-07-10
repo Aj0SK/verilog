@@ -1,22 +1,22 @@
 /* verilator lint_off UNUSED */
 module switch
   ( 
-    s,
-    d,
-    c1,
-    c0
+    i_s,
+    i_d,
+    o_c1,
+    o_c0
     );
    
-  input s;
-  input d;
-  output c1;
-  output c0;
+  input i_s;
+  input i_d;
+  output o_c1;
+  output o_c0;
   
   wire x;
   wire y;
   
-  and h1(x, s, d);
-  assign c1 = x;
+  and h1(x, i_s, i_d);
+  assign o_c1 = x;
   
-  and(c0, ~x, d);
+  and(o_c0, ~x, i_d);
 endmodule
