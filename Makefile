@@ -71,13 +71,13 @@ equal_zero:
 	iverilog -o $(BUILD)/equal_zero $(TESTBENCHES)/arithmetics/equal_zero_tb.v $(VERILOGMODULES)/arithmetics/equal_zero.v
 
 subtract:
-	#verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/subtract.v --top-module subtract --exe $(CPPTESTS)/arithmetics/subtract.cpp -Mdir $(OBJDIR)
-	#make -j -C $(OBJDIR) -f Vsubtract.mk Vsubtract
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/subtract.v --top-module subtract --exe $(CPPTESTS)/arithmetics/subtract.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vsubtract.mk Vsubtract
 	iverilog -o $(BUILD)/subtract_test $(TESTBENCHES)/arithmetics/subtract_tb.v $(VERILOGMODULES)/arithmetics/subtract.v
 
 increment:
-	#verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/increment.v --top-module increment --exe $(CPPTESTS)/arithmetics/increment.cpp -Mdir $(OBJDIR)
-	#make -j -C $(OBJDIR) -f Vincrement.mk Vincrement
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/arithmetics/increment.v --top-module increment --exe $(CPPTESTS)/arithmetics/increment.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vincrement.mk Vincrement
 	iverilog -o $(BUILD)/increment_test $(TESTBENCHES)/arithmetics/increment_tb.v $(VERILOGMODULES)/arithmetics/increment.v
 
 adder:
