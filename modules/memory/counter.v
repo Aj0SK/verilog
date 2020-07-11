@@ -26,7 +26,7 @@ module counter
     o <= curr;
   end
 
-  always @(*)
+  always @(st, X, o)
   begin
     curr = 0;
     if(st) curr = X;

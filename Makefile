@@ -29,6 +29,8 @@ ram:
 	iverilog -o $(BUILD)/ram_test $(TESTBENCHES)/memory/ram_tb.v $(VERILOGMODULES)/memory/ram.v
 
 demultiplexor:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/plumbing/demultiplexor.v --top-module demultiplexor --exe $(CPPTESTS)/plumbing/demultiplexor.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vdemultiplexor.mk Vdemultiplexor
 	iverilog -o $(BUILD)/demultiplexor_test $(TESTBENCHES)/plumbing/demultiplexor_tb.v $(VERILOGMODULES)/plumbing/demultiplexor.v
 
 counter:

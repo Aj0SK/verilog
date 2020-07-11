@@ -1,19 +1,6 @@
 /* verilator lint_off UNUSED */
+/* verilator lint_off DECLFILENAME */
 
-module is_same
-  (
-    x,
-    y,
-    out
-    );
-    
-    parameter BUS_WIDTH = 4;
-    input wire[BUS_WIDTH-1:0] x;
-    input wire[BUS_WIDTH-1:0] y;
-    output wire out;
-    
-    assign out = (x==y);
-endmodule
 module demultiplexor
   ( 
     address,
@@ -37,5 +24,19 @@ module demultiplexor
       and(out[i], s[i], x);
     end
   endgenerate
-  
+endmodule
+
+module is_same
+  (
+    x,
+    y,
+    out
+    );
+
+    parameter BUS_WIDTH = 4;
+    input wire[BUS_WIDTH-1:0] x;
+    input wire[BUS_WIDTH-1:0] y;
+    output wire out;
+
+    assign out = (x==y);
 endmodule
