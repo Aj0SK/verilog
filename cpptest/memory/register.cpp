@@ -7,13 +7,13 @@ int main(int argc, char **argv, char **env) {
   Verilated::commandArgs(argc, argv);
   std::unique_ptr<Vregister> top(new Vregister);
   while (!Verilated::gotFinish()) {
-    top->st = 1;
-    top->d = 20;
+    top->i_st = 1;
+    top->i_d = 20;
     top->clk = 0;
     top->eval();
-    printf("st:%d X:%d clk:%d counter: %d", top->st, top->d, top->clk,
-           top->o);
-    if (top->o == 0) {
+    printf("st:%d X:%d clk:%d counter: %d", top->i_st, top->i_d, top->clk,
+           top->o_o);
+    if (top->o_o == 0) {
       printf(" Success\n");
     } else {
       printf(" Error\n");
