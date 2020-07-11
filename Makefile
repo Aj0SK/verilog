@@ -32,6 +32,8 @@ demultiplexor:
 	iverilog -o $(BUILD)/demultiplexor_test $(TESTBENCHES)/plumbing/demultiplexor_tb.v $(VERILOGMODULES)/plumbing/demultiplexor.v
 
 counter:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/counter.v --top-module counter --exe $(CPPTESTS)/memory/counter.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vcounter.mk Vcounter
 	iverilog -o $(BUILD)/counter_test $(TESTBENCHES)/memory/counter_tb.v $(VERILOGMODULES)/memory/counter.v
 
 condition:

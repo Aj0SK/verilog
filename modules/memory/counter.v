@@ -18,23 +18,19 @@ module counter
   reg [BUS_WIDTH-1:0] curr;
   wire [BUS_WIDTH-1:0] helper1;
 
-  increment inc1(curr, helper1);
+  //assign helper1 = curr + 1;
+  //increment inc1(curr, helper1);
 
   always @(posedge clk)
   begin
     o <= curr;
   end
 
-  always @(st, clk, X)
+  always @(*)
   begin
-    if(st)
-    begin
-      if(!clk) curr <= X;
-    end
-    else
-    begin
-      if (!clk) curr <= helper1;
-    end
+    curr = 0;
+    if(st) curr = X;
+    else curr = o+1;
   end
   
 endmodule
