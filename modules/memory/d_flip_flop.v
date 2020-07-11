@@ -1,26 +1,28 @@
 `include "modules/latch.v"
 module d_flip_flop
   ( 
-    st,
-    d,
+    i_st,
+    i_d,
     clk,
-    o
+    o_o
     );
    
-  input st;
-  input d;
+  input i_st;
+  input i_d;
   input clk;
-  output reg o;
+  output reg o_o;
   
   reg stored;
   
-  always @(st, d)
+  always @(i_st, i_d, o_o)
   begin
-    if(st) stored <= d;
+    stored = 0;
+    if(i_st) stored = i_d;
+    else stored = o_o;
   end
   
   always @(posedge clk)
   begin
-    if(st) o <= stored;
+    o_o <= stored;
   end
 endmodule

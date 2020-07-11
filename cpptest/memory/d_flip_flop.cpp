@@ -7,34 +7,42 @@ int main(int argc, char **argv, char **env) {
   Verilated::commandArgs(argc, argv);
   std::unique_ptr<Vd_flip_flop> top(new Vd_flip_flop);
   while (!Verilated::gotFinish()) {
-    top->d = 0;
-    top->load = 0;
-    top->reset = 0;
+    top->i_st = 1;
+    top->i_d = 1;
     top->clk = 0;
     top->eval();
-    printf("d:%d load:%d reset: %d clk: %d q:%d\n", top->d, top->load,
-           top->reset, top->clk, top->q);
-    top->d = 1;
-    top->load = 1;
-    top->reset = 0;
+    printf("st:%d d:%d clk:%d o:%d", top->i_st, top->i_d, top->clk, top->o_o);
+    if (top->o_o == 0) {
+      printf(" Success\n");
+    } else {
+      printf(" Error\n");
+      break;
+    }
+
+    top->i_st = 1;
+    top->i_d = 1;
     top->clk = 1;
     top->eval();
-    printf("d:%d load:%d reset: %d clk: %d q:%d\n", top->d, top->load,
-           top->reset, top->clk, top->q);
-    top->d = 1;
-    top->load = 0;
-    top->reset = 1;
+    printf("st:%d d:%d clk:%d o:%d", top->i_st, top->i_d, top->clk, top->o_o);
+    if (top->o_o == 1) {
+      printf(" Success\n");
+    } else {
+      printf(" Error\n");
+      break;
+    }
+
+    top->i_st = 0;
+    top->i_d = 1;
     top->clk = 0;
     top->eval();
-    printf("d:%d load:%d reset: %d clk: %d q:%d\n", top->d, top->load,
-           top->reset, top->clk, top->q);
-    top->d = 1;
-    top->load = 0;
-    top->reset = 1;
-    top->clk = 1;
-    top->eval();
-    printf("d:%d load:%d reset: %d clk: %d q:%d\n", top->d, top->load,
-           top->reset, top->clk, top->q);
+    printf("st:%d d:%d clk:%d o:%d", top->i_st, top->i_d, top->clk, top->o_o);
+    if (top->o_o == 1) {
+      printf(" Success\n");
+    } else {
+      printf(" Error\n");
+      break;
+    }
+
     break;
   }
   top->final();

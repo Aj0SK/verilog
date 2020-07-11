@@ -12,13 +12,13 @@ int main(int argc, char **argv, char **env) {
     for (int i = 0; i < kAddressWidth; ++i) {
       for (int j = 0; j < 2; ++j) {
 
-        top->address = 1 << i;
-        top->x = j;
+        top->i_address = 1 << i;
+        top->i_x = j;
         top->eval();
 
-        printf("address:%d x:%d out:%d", top->address, top->x, top->out);
+        printf("address:%d x:%d out:%d", top->i_address, top->i_x, top->o_out);
         int out = j << (1 << i);
-        if (out != top->out) {
+        if (out != top->o_out) {
           printf("\tError\n");
           i = kAddressWidth;
           j = 2;

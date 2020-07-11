@@ -42,12 +42,16 @@ condition:
 	iverilog -o $(BUILD)/condition_test $(TESTBENCHES)/alu/condition_tb.v $(VERILOGMODULES)/alu/condition.v
 
 register:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/register.v --top-module register --exe $(CPPTESTS)/memory/register.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vregister.mk Vregister
 	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
 	
 latch:
 	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v $(VERILOGMODULES)/latch.v
 
 d_flip_flop:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/d_flip_flop.v --top-module d_flip_flop --exe $(CPPTESTS)/memory/d_flip_flop.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vd_flip_flop.mk Vd_flip_flop
 	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v $(VERILOGMODULES)/memory/d_flip_flop.v
 
 unary_alu:
