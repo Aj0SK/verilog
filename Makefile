@@ -60,6 +60,8 @@ unary_alu:
 	iverilog -o $(BUILD)/unary_alu $(TESTBENCHES)/alu/unary_alu_tb.v $(VERILOGMODULES)/alu/unary_alu.v
 
 alu:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/alu/alu.v --top-module alu --exe $(CPPTESTS)/alu/alu.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Valu.mk Valu
 	iverilog -o $(BUILD)/alu $(TESTBENCHES)/alu/alu_tb.v $(VERILOGMODULES)/alu/alu.v
 
 switch:

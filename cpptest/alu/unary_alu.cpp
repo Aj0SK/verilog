@@ -32,8 +32,7 @@ int main(int argc, char **argv, char **env) {
             printf(" Success\n");
           } else {
             printf(" Error\n");
-            i = 2;
-            j = 2;
+            i = j = 2;
             x = (1 << kBusWidth);
             break;
           }

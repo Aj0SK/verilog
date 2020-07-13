@@ -2,27 +2,27 @@
 `include "modules/arithmetics/adder.v"
 module alu
   ( 
-    zx,
-    nx,
-    zy,
-    ny,
-    f,
-    no,
-    X,
-    Y,
-    O
+    i_zx,
+    i_nx,
+    i_zy,
+    i_ny,
+    i_f,
+    i_no,
+    i_X,
+    i_Y,
+    o_O
     );
    
-  input zx, nx, zy, ny, f, no;
-  input wire[7:0] X;
-  input wire[7:0] Y;
-  output wire[7:0] O;
+  input i_zx, i_nx, i_zy, i_ny, i_f, i_no;
+  input wire[7:0] i_X;
+  input wire[7:0] i_Y;
+  output wire[7:0] o_O;
   
   wire[7:0] O1;
   wire[7:0] O2;
   
-  unary_alu ualu1(zx, nx, X, O1);
-  unary_alu ualu2(zy, ny, Y, O2);
+  unary_alu ualu1(i_zx, i_nx, i_X, O1);
+  unary_alu ualu2(i_zy, i_ny, i_Y, O2);
   
   wire[7:0] RES1;
   wire[7:0] RES2;
@@ -31,8 +31,8 @@ module alu
   adder a1(O1, O2, 1'b0, RES2);
   
   wire[7:0] RES;
-  selector #(.BUS_WIDTH(8)) s1(RES1, RES2, f, RES);
+  selector #(.BUS_WIDTH(8)) s1(RES1, RES2, i_f, RES);
   
-  selector #(.BUS_WIDTH(8)) s2(RES, ~RES, no, O);
+  selector #(.BUS_WIDTH(8)) s2(RES, ~RES, i_no, o_O);
   
 endmodule
