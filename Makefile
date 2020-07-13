@@ -55,6 +55,8 @@ d_flip_flop:
 	iverilog -o $(BUILD)/d_flip_flop $(TESTBENCHES)/memory/d_flip_flop_tb.v $(VERILOGMODULES)/memory/d_flip_flop.v
 
 unary_alu:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/alu/unary_alu.v --top-module unary_alu --exe $(CPPTESTS)/alu/unary_alu.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vunary_alu.mk Vunary_alu
 	iverilog -o $(BUILD)/unary_alu $(TESTBENCHES)/alu/unary_alu_tb.v $(VERILOGMODULES)/alu/unary_alu.v
 
 alu:
