@@ -1,5 +1,5 @@
 `include "modules/memory/d_flip_flop.v"
-module register
+module regist
   ( 
     i_st,
     i_d,

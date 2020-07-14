@@ -1,11 +1,11 @@
-#include "Vregister.h"
+#include "Vregist.h"
 #include <cstdio>
 #include <memory>
 #include <verilated.h>
 
 int main(int argc, char **argv, char **env) {
   Verilated::commandArgs(argc, argv);
-  std::unique_ptr<Vregister> top(new Vregister);
+  std::unique_ptr<Vregist> top(new Vregist);
   while (!Verilated::gotFinish()) {
     top->i_st = 1;
     top->i_d = 20;

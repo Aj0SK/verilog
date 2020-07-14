@@ -26,6 +26,8 @@ sample: hello_world sample_and sample_nand
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch demultiplexor
 
 ram:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/ram.v --top-module ram --exe $(CPPTESTS)/memory/ram.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vram.mk Vram
 	iverilog -o $(BUILD)/ram_test $(TESTBENCHES)/memory/ram_tb.v $(VERILOGMODULES)/memory/ram.v
 
 demultiplexor:
@@ -43,10 +45,10 @@ condition:
 	make -j -C $(OBJDIR) -f Vcondition.mk Vcondition
 	iverilog -o $(BUILD)/condition_test $(TESTBENCHES)/alu/condition_tb.v $(VERILOGMODULES)/alu/condition.v
 
-register:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/register.v --top-module register --exe $(CPPTESTS)/memory/register.cpp -Mdir $(OBJDIR)
-	make -j -C $(OBJDIR) -f Vregister.mk Vregister
-	iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
+regist:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/regist.v --top-module regist --exe $(CPPTESTS)/memory/regist.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vregist.mk Vregist
+	#iverilog -o $(BUILD)/register_test $(TESTBENCHES)/memory/register_tb.v $(VERILOGMODULES)/memory/register.v
 	
 latch:
 	iverilog -o $(BUILD)/latch_test $(TESTBENCHES)/latch_tb.v $(VERILOGMODULES)/latch.v

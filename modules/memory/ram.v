@@ -1,4 +1,4 @@
-`include "modules/memory/register.v"
+`include "modules/memory/regist.v"
 `include "modules/plumbing/demultiplexor.v"
 module ram
   ( 
@@ -29,7 +29,7 @@ module ram
   for (i = 0; i < (1<<ADDRESS_WIDTH); i = i + 1)
     begin
       and(instr[i], st, ad_transl[i]);
-      register #(.BUS_WIDTH(BUS_WIDTH)) r(instr[i], X, clk, o[i]);
+      regist #(.BUS_WIDTH(BUS_WIDTH)) r(instr[i], X, clk, o[i]);
     end
   endgenerate
   //TODO
