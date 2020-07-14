@@ -39,6 +39,8 @@ counter:
 	iverilog -o $(BUILD)/counter_test $(TESTBENCHES)/memory/counter_tb.v $(VERILOGMODULES)/memory/counter.v
 
 condition:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/alu/condition.v --top-module condition --exe $(CPPTESTS)/alu/condition.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vcondition.mk Vcondition
 	iverilog -o $(BUILD)/condition_test $(TESTBENCHES)/alu/condition_tb.v $(VERILOGMODULES)/alu/condition.v
 
 register:
