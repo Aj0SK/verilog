@@ -19,11 +19,15 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/**/*.cpp
 
-seq: latch d_flip_flop regist unary_alu alu condition counter ram comb_mem
+seq: latch d_flip_flop regist unary_alu alu condition counter ram comb_mem instr_decoder
 
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch demultiplexor
+
+instr_decoder:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/processor/instr_decoder.v --top-module instr_decoder --exe $(CPPTESTS)/processor/instr_decoder.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vinstr_decoder.mk Vinstr_decoder
 
 comb_mem:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/processor/comb_mem.v --top-module comb_mem --exe $(CPPTESTS)/processor/comb_mem.cpp -Mdir $(OBJDIR)
