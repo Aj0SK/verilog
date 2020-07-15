@@ -12,7 +12,7 @@ module d_flip_flop
   input clk;
   output reg o_o;
   
-  reg stored;
+  reg stored = 0;
   
   always @(i_st, i_d, o_o)
   begin

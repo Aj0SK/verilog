@@ -1,12 +1,9 @@
-#include "Vram.h"
-
-#include <algorithm>
+#include "Vcomb_mem.h"
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 #include <memory>
 #include <vector>
-
 #include <verilated.h>
 
 using std::min;
@@ -22,27 +19,40 @@ constexpr int kRamSize = 1 << kAddressWidth;
 
 int main(int argc, char **argv, char **env) {
   Verilated::commandArgs(argc, argv);
-  std::unique_ptr<Vram> top(new Vram);
+  std::unique_ptr<Vcomb_mem> top(new Vcomb_mem);
 
   srand(21);
 
   while (!Verilated::gotFinish()) {
-
     for (int t = 0; t < kTestScenarios; ++t) {
-      int registerA = 0, registerD = 0;
-
       vector<int> mem(kRamSize, 0);
       int curr_modified = rand() % kMaxModified;
       for (int m = 0; m < curr_modified; ++m) {
         int number = rand() % kMaxNumber;
         int address = rand() % kRamSize;
         mem[address] = number;
-        top->ad = address;
-        top->st = 1;
-        top->X = number;
-        top->clk = 0;
+
+        top->i_a = 1;
+        top->i_d = 0;
+        top->i_p = 0;
+        top->i_X = address;
+        top->i_clk = 0;
         top->eval();
-        top->clk = 1;
+        top->i_clk = 1;
+        top->eval();
+
+        if (top->o_A != address) {
+          printf(" Error during address write.\n");
+          break;
+        }
+
+        top->i_a = 0;
+        top->i_d = 0;
+        top->i_p = 1;
+        top->i_X = number;
+        top->i_clk = 0;
+        top->eval();
+        top->i_clk = 1;
         top->eval();
       }
 
@@ -53,15 +63,22 @@ int main(int argc, char **argv, char **env) {
       printf("\n");
 
       for (int i = 0; i < kRamSize; ++i) {
-        top->ad = i;
-        top->st = 0;
-        top->X = rand() % kMaxNumber;
-        top->clk = 0;
+
+        top->i_a = 1;
+        top->i_d = 0;
+        top->i_p = 0;
+        top->i_X = i;
+        top->i_clk = 0;
         top->eval();
-        top->clk = 1;
+        top->i_clk = 1;
         top->eval();
 
-        if (top->O != mem[i]) {
+        if (top->o_A != i) {
+          printf(" Error during address write.\n");
+          break;
+        }
+
+        if (top->o_P != mem[i]) {
           printf(" Error\n");
           break;
         }

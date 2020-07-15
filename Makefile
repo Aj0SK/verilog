@@ -19,11 +19,15 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/**/*.cpp
 
-seq: latch d_flip_flop register unary_alu alu condition counter ram
+seq: latch d_flip_flop regist unary_alu alu condition counter ram comb_mem
 
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch demultiplexor
+
+comb_mem:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/processor/comb_mem.v --top-module comb_mem --exe $(CPPTESTS)/processor/comb_mem.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vcomb_mem.mk Vcomb_mem
 
 ram:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/ram.v --top-module ram --exe $(CPPTESTS)/memory/ram.cpp -Mdir $(OBJDIR)

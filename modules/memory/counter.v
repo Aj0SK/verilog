@@ -1,4 +1,4 @@
-`include "modules/memory/register.v"
+`include "modules/memory/regist.v"
 `include "modules/arithmetics/increment.v"
 module counter
   ( 
