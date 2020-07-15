@@ -5,6 +5,7 @@ CPPTESTS = cpptest
 TESTBENCHES = testbench
 
 CPPFLAGS = -std=c++17 -O2 -Wall
+VERILATORFLAGS = --unroll-count 1048576
 
 all: prepare sample comb seq
 
@@ -19,11 +20,15 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/**/*.cpp
 
-seq: latch d_flip_flop regist unary_alu alu condition counter ram comb_mem instr_decoder
+seq: latch d_flip_flop regist unary_alu alu condition counter ram comb_mem instr_decoder control_unit
 
 sample: hello_world sample_and sample_nand
 
 comb: half_adder full_adder adder increment subtract equal_zero less_than_zero selector switch demultiplexor
+
+control_unit:
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/processor/control_unit.v $(VERILATORFLAGS) --top-module control_unit --exe $(CPPTESTS)/processor/control_unit.cpp -Mdir $(OBJDIR)
+	make -j -C $(OBJDIR) -f Vcontrol_unit.mk Vcontrol_unit
 
 instr_decoder:
 	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/processor/instr_decoder.v --top-module instr_decoder --exe $(CPPTESTS)/processor/instr_decoder.cpp -Mdir $(OBJDIR)
