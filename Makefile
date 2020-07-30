@@ -4,7 +4,7 @@ VERILOGMODULES = modules
 CPPTESTS = cpptest
 
 CPPFLAGS = -std=c++17 -O2 -Wall
-VERILATORFLAGS = --unroll-count 1048576
+VERILATORFLAGS = --unroll-count 65536
 
 all: prepare sample comb seq
 
@@ -19,7 +19,7 @@ clean:
 reformat:
 	clang-format -i -style=LLVM cpptest/**/*.cpp
 
-seq: d_flip_flop regist unary_alu alu condition counter ram comb_mem instr_decoder #control_unit #latch
+seq: d_flip_flop regist unary_alu alu condition counter ram comb_mem instr_decoder control_unit #latch
 
 sample: hello_world sample_and sample_nand
 
@@ -38,7 +38,7 @@ comb_mem:
 	make -j -C $(OBJDIR) -f Vcomb_mem.mk Vcomb_mem
 
 ram:
-	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/ram.v --top-module ram --exe $(CPPTESTS)/memory/ram.cpp -Mdir $(OBJDIR)
+	verilator -CFLAGS $(CPPFLAGS) --cc $(VERILOGMODULES)/memory/ram.v $(VERILATORFLAGS) --top-module ram --exe $(CPPTESTS)/memory/ram.cpp -Mdir $(OBJDIR)
 	make -j -C $(OBJDIR) -f Vram.mk Vram
 
 demultiplexor:
