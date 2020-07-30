@@ -19,10 +19,10 @@ module ram
   output wire[BUS_WIDTH-1:0] O;
   
   wire[(1<<ADDRESS_WIDTH)-1:0][BUS_WIDTH-1:0] o;
-  
-  demultiplexor #(.ADDRESS_WIDTH(ADDRESS_WIDTH)) de1(ad, st, instr);
   wire[(1<<ADDRESS_WIDTH)-1:0] instr;
-  
+
+  demultiplexor #(.ADDRESS_WIDTH(ADDRESS_WIDTH)) de1(ad, st, instr);
+
   generate
   genvar i;
   for (i = 0; i < (1<<ADDRESS_WIDTH); i = i + 1)

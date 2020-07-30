@@ -13,8 +13,7 @@ module demultiplexor
   input wire[ADDRESS_WIDTH-1:0] i_address;
   input wire i_x;
   output wire[(1<<ADDRESS_WIDTH)-1:0] o_out;
-  
-  wire[(1<<ADDRESS_WIDTH)-1:0] s;
+
   generate
   genvar i;
   for (i = 0; i < (1<<ADDRESS_WIDTH); i = i + 1)
